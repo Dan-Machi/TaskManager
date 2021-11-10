@@ -1,0 +1,47 @@
+﻿@model ToDoApp.Models.Entities.ViewAssignee
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>Assignees</h1>
+    <a href="assignee/new">Add assignee</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Assignees)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>
+                        <form action="assignee/edit" method="post">
+                            <button value=@item.Id name="id">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/assignee/delete" method="post">
+                            <button value=@item.Id name="id">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+<style>
+    table, td, th {
+        border: 1px solid black;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 25%;
+    }
+</style>

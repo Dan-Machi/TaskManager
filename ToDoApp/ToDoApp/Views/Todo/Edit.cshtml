@@ -1,0 +1,42 @@
+﻿@model ToDoApp.Models.Entities.ViewAssignee  
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>Edit todo</h1>
+    <form action="change" method="post">
+        <label for="task">Rename task</label>
+        <input type="text" name="task" />
+        <label for="urgent">Urgent</label>
+        @if (Model.Todo.IsUrgent == true)
+        {
+            <input value=true type="checkbox" name="urgent" checked>
+        }
+        else
+        {
+            <input value=false type="checkbox" name="urgent">
+        }
+        <label for="done">Done</label>
+        @if (Model.Todo.IsDone == true)
+        {
+            <input value=true type="checkbox" name="done" checked>
+        }
+        else
+        {
+            <input value=false type="checkbox" name="done">
+        }
+        <input type="hidden" name="id" value=@Model.Todo.Id>
+        <label for="assignee">Assigne</label>
+        <select name="assignee" id="assignee">
+            <option></option>
+            @foreach (var item in Model.Assignees)
+            {
+                <option value=@item.Id>@item.Name</option>
+            }
+        </select>
+        <button type="submit">Change</button>
+    </form>
+    <a href="list">Cancel</a>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@model ToDoApp.Models.Entities.ViewTodo
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>Todos for today:</h1>
+    <form action="todo/find" method="post">
+        <label for="word">Find keyword</label>
+        <input type="text" name="word" />
+        <button type="submit">Find</button>
+    </form>
+    <a href="todo/list">Show all</a>
+    <a asp-controller="Assignee" asp-action="Index">List of Assignees</a>
+    <a href="todo/new">New task</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Task</th>
+                <th>IsUrgent</th>
+                <th>IsDone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Todos)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                    <td>@item.IsUrgent</td>
+                    <td>@item.IsDone</td>
+                    <td>
+                        <form action="/todo/delete" method="post">
+                            <button value=@item.Id name="id">Delete</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/todo/edit" method="post">
+                            <button value=@item.Id name="id">Edit</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+<style>
+    table, td, th {
+        border: 1px solid black;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 25%;
+    }
+</style>
